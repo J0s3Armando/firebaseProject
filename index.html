@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <title>Lista de tareas</title>
+</head>
+<body>
+    <header class="mb-3">
+        <nav class="nav-wrapper pink lighten-1">
+            <a href="#" class="brand-logo center"><i class="material-icons large">assignment</i>Tareas</a>
+        </nav>
+    </header>
+    <section class="container">
+        <section class="row">
+           <div class="col12">
+                <form id="add-assignment-form">
+                    <div class="input-field">
+                        <i class="material-icons prefix">create</i>
+                        <input type="text" name="title" id="title" placeholder="Tarea" required>
+                        <label for="title">Título de la tarea</label>
+                    </div>
+                    <div class="input-field">
+                        <i class="material-icons prefix">comment</i>
+                        <textarea name="description" id="description"  class="materialize-textarea" data-length="120" required></textarea>
+                        <label for="description">Descripción de la tarea</label>
+                    </div>
+                    <button class="waves-effect waves-light btn indigo"><i class="material-icons left">add</i>Agregar</button>
+                </form>
+           </div>
+        </section>
+        <section class="row">
+            <div class="col12">
+                <ul class="collection with-header">
+                    <li class="collection-header">
+                        <h4>Tareas pendientes</h4>
+                    </li>
+                    <li class="collection-item" id="tasklist">
+                       
+                    </li>
+                    <div id="modal1" class="modal">
+                        <div class="modal-content">
+                            <div class="container">
+                                <h4>Editar Tarea</h4>
+                               <div class="input-field">
+                                    <i class="material-icons prefix">create</i>
+                                    <input type="text" placeholder="Título de la tarea" name="newTitle" id="newTitle">
+                               </div>
+                               <div class="input-field">
+                                   <i class="material-icons prefix">comment</i>
+                                   <textarea name="newDescription" class="materialize-textarea" id="newDescription" placeholder="Descripción de la tarea" title="Breve descripción de lo que deseas hacer"></textarea>
+                               </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="#" class="modal-close waves-effect btn-flat indigo white-text" id="updateTask">
+                                Actualizar
+                            </a>
+                        </div>
+                    </div>
+                </ul>
+            </div>
+        </section>
+    </section>
+    <script src="js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-firestore.js"></script>
+    <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyB5wqoxKzF9pPQKXgaRGwmZMklmzVAMxKs",
+            authDomain: "listadetareas-f0476.firebaseapp.com",
+            projectId: "listadetareas-f0476",
+            storageBucket: "listadetareas-f0476.appspot.com",
+            messagingSenderId: "421169030658",
+            appId: "1:421169030658:web:2f7fe33bcba17a546c691b"
+        };
+        firebase.initializeApp(firebaseConfig);
+        var db = firebase.firestore();
+    </script>
+    <script src="js/main.js"></script>
+</body>
+</html>

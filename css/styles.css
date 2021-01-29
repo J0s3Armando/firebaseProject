@@ -1,0 +1,19 @@
+.m-1 {
+  margin: 1em;
+}
+
+.mt-1 {
+  margin-top: 1em;
+}
+
+.mb-3 {
+  margin-bottom: 3em;
+}
+
+.bold-text {
+  font-weight: bold;
+}
+
+.text-justified {
+  text-align: justify;
+}
