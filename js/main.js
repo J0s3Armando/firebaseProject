@@ -14,7 +14,8 @@ document.addEventListener('DOMContentLoaded',()=>
 
 
 db.collection('homeworks').orderBy('title').onSnapshot(snapshot=>{
-    let changes = snapshot.docChanges();
+    let changes = snapshot.docChanges(); 
+    //get all items form database and all changes
     changes.forEach((change) =>{
         if(change.type == 'added')
         {
@@ -27,11 +28,11 @@ db.collection('homeworks').orderBy('title').onSnapshot(snapshot=>{
         }
         else if(change.type=='modified')
         {
-           let                     li                     = document.querySelector(`[data-id="${change.doc.id}"]`);
-           li.getElementsByTagName('span')[0].textContent = newTitle;
-           li.getElementsByTagName('p')[0].textContent    = newDescription;
-                                   newTitle               = '';
-                                   newDescription         = '';
+            let                     li                     = document.querySelector(`[data-id="${change.doc.id}"]`);
+            li.getElementsByTagName('span')[0].textContent = newTitle;
+            li.getElementsByTagName('p')[0].textContent    = newDescription;
+                                    newTitle               = '';
+                                    newDescription         = '';
         }
     });
 });
@@ -88,7 +89,28 @@ function homeworkList(data) {
     delBtn.addEventListener('click',e =>{
         //delete a task
         let deleteTaskID = e.target.parentElement.parentElement.getAttribute('data-id');
-        db.collection('homeworks').doc(deleteTaskID).delete();
+        let taskTitle = e.target.previousElementSibling.textContent;
+        Swal.fire({
+            title:`"${taskTitle}"`,
+            text:"¿Estás seguro de eliminar el recordatorio?",
+            showCancelButton: true,
+            cancelButtonColor: '#d32f2f',
+            cancelButtonText:'Cancelar',
+            confirmButtonColor: '#1565c0',
+            confirmButtonText : 'Sí, eliminar',
+        }).then((result)=>{
+            if(result.isConfirmed)
+            {
+                db.collection('homeworks').doc(deleteTaskID).delete(); //delete from database
+                Swal.fire(
+                    {
+                        title: 'Eliminado',
+                        text: 'El recordatorio ha sido eliminado',
+                        confirmButtonText:'Aceptar'
+                    }
+                );
+            }
+        });
     });
 
     editBtn.addEventListener('click',(e)=>{
